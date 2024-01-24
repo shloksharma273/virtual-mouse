@@ -19,15 +19,28 @@ while True :
         for hand in hands :
             drawing_utils.draw_landmarks(frame, hand)
             landmarks = hand.landmark
+            # print(landmarks)
             for id, landmark in enumerate(landmarks):
-                x = int(landmark.x * frame_width)
-                y = int(landmark.y * frame_height)
-                if id == 4:
+            #     x = int(landmark.x * frame_width)
+            #     y = int(landmark.y * frame_height)
+                if id == 9:
+                    x = int(landmarks[9].x * frame_width)
+                    y = int(landmarks[9].y * frame_height)
                     cv2.circle(img = frame, center = (x,y), radius = 10, color = (0, 255, 255))
-                    index_x = screen_width/frame_width * x
+                    palm_x = screen_width/frame_width * x 
+                    palm_y = screen_height/frame_height * y
+                    pyautogui.moveTo(palm_x, palm_y)
+                
+                if id == 4:
+                    x = int(landmarks[4].x * frame_width)
+                    y = int(landmarks[4].y * frame_height)
+                    cv2.circle(img = frame, center = (x,y), radius = 10, color = (0, 255, 255))
+                    index_x = screen_width/frame_width * x 
                     index_y = screen_height/frame_height * y
-                    pyautogui.moveTo(index_x, index_y)
+                
                 if id == 8:
+                    x = int(landmarks[8].x * frame_width)
+                    y = int(landmarks[8].y * frame_height)
                     cv2.circle(img = frame, center = (x,y), radius = 10, color = (0, 255, 255))
                     thumb_x = screen_width/frame_width * x
                     thumb_y = screen_height/frame_height * y
